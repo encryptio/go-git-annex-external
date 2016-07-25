@@ -26,7 +26,7 @@ func NewProgressReader(r io.Reader, e *External) *ProgressReader {
 func (pr *ProgressReader) Read(p []byte) (int, error) {
 	n, err := pr.r.Read(p)
 	pr.n += int64(n)
-	if pr.n-pr.lastPrint > ProgressByteLimit {
+	if pr.n-pr.lastPrint > ProgressByteLimit || (pr.n != pr.lastPrint && err != nil) {
 		pr.e.Progress(pr.n)
 		pr.lastPrint = pr.n
 	}
