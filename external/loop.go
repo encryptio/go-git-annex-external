@@ -146,7 +146,10 @@ func (e *External) loop() (err error) {
 			return err
 		}
 		line = strings.TrimSuffix(line, "\n")
-
+		
+		// Windows carriage return https://github.com/DanielDent/git-annex-remote-rclone/commit/a71a45f2a6634c46bc548583d5334124004ce834
+		line = strings.TrimSuffix(line, "\r")
+		
 		fields := strings.Split(line, " ")
 		switch fields[0] {
 		case "INITREMOTE":
