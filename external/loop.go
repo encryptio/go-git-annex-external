@@ -145,7 +145,7 @@ func (e *External) loop() (err error) {
 			}
 			return err
 		}
-		line = strings.TrimSuffix(line, "\n")
+		line = strings.TrimRight(line, "\r\n")
 
 		fields := strings.Split(line, " ")
 		switch fields[0] {
